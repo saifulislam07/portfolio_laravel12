@@ -108,6 +108,7 @@
                             <i class="fas fa-cog"></i> Settings
                         </a>
                     </li>
+                   
                 </ul>
             </div>
         </nav>
