@@ -11,21 +11,25 @@ A premium, high-performance, and strictly monochromatic portfolio system designe
 ## 🌟 Key Features
 
 ### 🎨 Premium Aesthetic & UI
+
 - **Luxury Monochrome Design**: A strict black-and-white, high-contrast visual language throughout the frontend and backend.
 - **Dynamic Frontend**: Modern, responsive layouts powered by **AOS (Animate On Scroll)** and custom typography.
 - **Custom Error Pages**: Professionally designed 404, 500, and 503 pages that maintain your brand's integrity even during failures.
 
 ### 🏢 Content Management (CMS)
+
 - **Project Showcase**: Full CRUD management for projects with multi-image handling and unique slug generation.
 - **Skill & Hobby Engine**: Manage your technical stack and personal interests dynamically from the dashboard.
 - **Biometric Integration (Concept)**: Ready for expansion into automated data fetching.
 
 ### 📊 Advanced Admin Dashboard
+
 - **Real-time Analytics**: Integrated **Chart.js** visualizations for Visitor Trends, Traffic Sources, and Page Performance.
 - **Contact Management**: AJAX-powered message center with instant "Mark as Read" functionality and secure input purification.
 - **Maintenance Mode**: Toggle your site availability with a single click from the admin topbar.
 
 ### 🛡️ Security & SEO
+
 - **Backdoor Login**: Renamed authentication routes (`/backdoor`) for improved security through obscurity.
 - **SEO Suite**: Dynamic meta tags (Description, Keywords) and an automated **Sitemap.xml** generator for rapid indexing.
 - **Input Sanitization**: Multi-layer protection against XSS and script injection on all public forms.
@@ -33,7 +37,8 @@ A premium, high-performance, and strictly monochromatic portfolio system designe
 ---
 
 ## 🛠 Technology Stack
-- **Backend**: Laravel 11/12 (PHP 8.2+)
+
+- **Backend**: Laravel 12 (PHP 8.2+)
 - **Database**: MySQL / MariaDB
 - **Frontend**: Blade Templates, Vanilla CSS, Bootstrap 5
 - **Charts & Motion**: Chart.js, AOS.js
@@ -46,31 +51,39 @@ A premium, high-performance, and strictly monochromatic portfolio system designe
 Ensure you have **Composer**, **NPM**, and **MySQL** installed before proceeding.
 
 ### 1. Clone the Repository
+
 ```bash
-git clone https://github.com/saifulislam07/go_gin_pw.git
-cd go_gin_pw
+git clone https://github.com/saifulislam07/portfolio_laravel12.git
+cd portfolio_laravel12
+
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 composer install
 npm install && npm run build
 ```
 
 ### 3. Environment Configuration
+
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
-*Update your `.env` file with your database and mail credentials.*
+
+_Update your `.env` file with your database and mail credentials._
 
 ### 4. Database Setup & Seeding
+
 ```bash
 php artisan migrate --seed
 ```
-*This creates all tables and populates the system with professional sample data.*
+
+_This creates all tables and populates the system with professional sample data._
 
 ### 5. Start the Application
+
 ```bash
 php artisan serve
 ```
@@ -81,8 +94,8 @@ php artisan serve
 
 Use the following default credentials for the initial setup:
 
-| Role | Route | Email | Password |
-| :--- | :--- | :--- | :--- |
+| Role            | Route       | Email             | Password   |
+| :-------------- | :---------- | :---------------- | :--------- |
 | **Super Admin** | `/backdoor` | `admin@admin.com` | `password` |
 
 ---
@@ -90,7 +103,7 @@ Use the following default credentials for the initial setup:
 ## 👨‍💻 Developer & Attribution
 
 - **Developer**: Md Saiful Islam
-- **Portfolio**: [saiful.dev](https://your-portfolio-link.com)
+      <!-- - **Portfolio**: [saiful.dev](https://your-portfolio-link.com) -->
 - **GitHub**: [@saifulislam07](https://github.com/saifulislam07)
 
 ---
@@ -99,6 +112,6 @@ Use the following default credentials for the initial setup:
 
 If this project helped you or you find it useful, consider supporting my work!
 
-<a href="https://www.buymeacoffee.com/saifulislam" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://paypal.me/tosaiful" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 > "Crafted with a passion for minimalism and modern engineering."
