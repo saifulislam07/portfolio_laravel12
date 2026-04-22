@@ -1,0 +1,78 @@
+:root {
+    --navy: #000000;
+    --gold: #000000;
+    --off-white: #ffffff;
+    --text-muted: #666666;
+    --luxury-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+body {
+    background-color: var(--off-white);
+    color: #000000;
+    font-family: 'Fragment Mono', monospace;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+h1, h2, h3, h4, .playfair {
+    font-family: 'Fragment Mono', monospace;
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+
+.text-gold { color: #000000 !important; }
+.bg-gold { background-color: #000000 !important; }
+.bg-navy { background-color: #000000 !important; }
+.gold-line { background-color: #000000 !important; }
+
+.btn-gold {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 0;
+    padding: 12px 30px;
+    font-weight: 400;
+    letter-spacing: 0;
+    transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+    background-color: transparent;
+    color: #000000;
+}
+
+.luxury-border {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    position: relative;
+}
+
+.luxury-border::after {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+}
+
+.card-luxury {
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: var(--luxury-shadow);
+    transition: transform 0.3s ease;
+}
+
+.card-luxury:hover {
+    transform: translateY(-5px);
+}
+
+.texture-bg::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: -1;
+}
