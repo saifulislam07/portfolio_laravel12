@@ -2,87 +2,86 @@
 
 @section('title', $project->title)
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/pages.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.css">
+@endpush
+
 @section('content')
-<section class="py-5 mt-5">
-    <div class="container">
-        <div class="row mb-5" data-aos="fade-up">
-            <div class="col-md-10 mx-auto text-center">
-                <h1 class="display-3 playfair mb-4">{{ $project->title }}</h1>
-                <div class="d-flex justify-content-center gap-2 mb-4">
-                    @foreach($project->tech_stack as $tech)
-                        <span class="badge rounded-0 border text-navy px-3 py-2">{{ trim($tech) }}</span>
-                    @endforeach
-                </div>
-            </div>
-        </div>
+@php
+    use Illuminate\Support\Str;
+    $url = fn ($path) => Str::startsWith($path, 'http') ? $path : asset($path);
+@endphp
 
-        <div class="row mb-5" data-aos="fade-up">
-            <div class="col-md-12">
-                <div class="luxury-border p-3 bg-white">
-                    <img src="{{ \Illuminate\Support\Str::startsWith($project->cover_image, 'http') ? $project->cover_image : asset($project->cover_image) }}" class="img-fluid w-100 shadow-lg" alt="{{ $project->title }}">
-                </div>
-            </div>
-        </div>
+<div class="page-shell">
 
-        <div class="row g-5">
-            <div class="col-md-8" data-aos="fade-right">
-                <div class="mb-5">
-                    <h3 class="playfair text-gold mb-3">Overview</h3>
-                    <div class="text-navy opacity-75 lead">
-                        {!! nl2br(e($project->description)) !!}
-                    </div>
-                </div>
+    <a class="back-link" href="{{ route('projects.index') }}">← back to work</a>
 
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <h4 class="playfair text-gold mb-3">The Problem</h4>
-                        <p class="text-muted">{{ $project->problem }}</p>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <h4 class="playfair text-gold mb-3">The Solution</h4>
-                        <p class="text-muted">{{ $project->solution }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-left">
-                <div class="card card-luxury p-4 sticky-top" style="top: 100px;">
-                    <h4 class="playfair mb-4 text-center">Gallery</h4>
-                    <div class="row g-2">
-                        @foreach($project->images as $img)
-                        <div class="col-6">
-                            <a href="{{ \Illuminate\Support\Str::startsWith($img->image_path, 'http') ? $img->image_path : asset($img->image_path) }}" class="gallery-link">
-                                <img src="{{ \Illuminate\Support\Str::startsWith($img->image_path, 'http') ? $img->image_path : asset($img->image_path) }}" class="img-fluid shadow-sm" alt="">
-                            </a>
+    <div class="detail-head" data-aos="fade-up">
+        <p class="prompt"><span class="sign">$ </span>cat projects/{{ $project->slug }}.md</p>
+        <h1>{{ $project->title }}</h1>
+
+        @if($project->tech_stack)
+            <ul class="tech-chips">
+                @foreach($project->tech_stack as $tech)
+                    <li>{{ trim($tech) }}</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
+
+    <div class="detail-cover" data-aos="fade-up">
+        <img src="{{ $url($project->cover_image) }}" alt="{{ $project->title }}">
+    </div>
+
+    <div class="detail-grid">
+        <div class="detail-prose" data-aos="fade-right">
+            <h2>Overview</h2>
+            <p>{!! nl2br(e($project->description)) !!}</p>
+
+            @if($project->problem || $project->solution)
+                <div class="detail-split">
+                    @if($project->problem)
+                        <div class="info-card">
+                            <h3>The problem</h3>
+                            <p>{{ $project->problem }}</p>
                         </div>
+                    @endif
+                    @if($project->solution)
+                        <div class="info-card">
+                            <h3>The solution</h3>
+                            <p>{{ $project->solution }}</p>
+                        </div>
+                    @endif
+                </div>
+            @endif
+        </div>
+
+        @if($project->images->count())
+            <aside class="detail-aside" data-aos="fade-left">
+                <div class="info-card">
+                    <h3>Gallery</h3>
+                    <div class="gallery-grid">
+                        @foreach($project->images as $img)
+                            <a class="gallery-link" href="{{ $url($img->image_path) }}">
+                                <img src="{{ $url($img->image_path) }}" alt="{{ $project->title }} screenshot">
+                            </a>
                         @endforeach
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="mt-5 text-center" data-aos="fade-up">
-            <a href="{{ route('projects.index') }}" class="btn btn-navy text-gold border-gold px-5 py-3 rounded-0">BACK TO WORK</a>
-        </div>
+            </aside>
+        @endif
     </div>
-</section>
 
-<style>
-    .btn-navy {
-        background-color: var(--navy);
-    }
-    .btn-navy:hover {
-        background-color: #1a2a44;
-    }
-</style>
+    <div class="page-foot">
+        <a href="{{ route('contact.index') }}">Building something similar? Let's talk →</a>
+    </div>
+</div>
 @endsection
-
-@push('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.css">
-@endpush
 
 @push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.js"></script>
 <script>
-    var lightbox = new SimpleLightbox('.gallery-link', {});
+    new SimpleLightbox('.gallery-link', {});
 </script>
 @endpush

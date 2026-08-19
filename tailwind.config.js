@@ -12,7 +12,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                // site-wide typeface: JetBrains Mono everywhere
+                sans: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
+                mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
             },
         },
     },

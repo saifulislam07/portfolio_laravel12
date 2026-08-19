@@ -15,7 +15,7 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            font-family: 'Fragment Mono', monospace;
+            font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         }
         .login-card {
             background-color: #ffffff;

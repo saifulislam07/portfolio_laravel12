@@ -1,0 +1,543 @@
+/* ==========================================================================
+   Shared inner-page styling — work archive, project detail, contact.
+   Same tokens and prompt/card language as the home page.
+   Two-class colour rules so they beat the layout's
+   `html:not(.dark) * { color:#000 !important }`.
+   ========================================================================== */
+
+.page-shell {
+    width: 100%;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 4rem;
+}
+
+@media (min-width: 992px) {
+    .page-shell {
+        padding-top: 4rem;
+    }
+}
+
+/* ---------- heading ---------- */
+
+.page-shell .prompt {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+    color: var(--hdr-active) !important;
+}
+
+.page-shell .prompt .sign {
+    user-select: none;
+    opacity: 0.7;
+    color: var(--hdr-muted) !important;
+}
+
+.page-shell .page-head {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--hdr-border);
+}
+
+.page-shell .page-head h1 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    color: var(--hdr-text) !important;
+}
+
+.page-shell .page-head p {
+    max-width: 44rem;
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--hdr-muted) !important;
+}
+
+/* ---------- back link ---------- */
+
+.page-shell .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--hdr-muted) !important;
+    transition: color 0.2s ease;
+}
+
+.page-shell .back-link:hover {
+    color: var(--hdr-active) !important;
+}
+
+/* ---------- tech chips ---------- */
+
+.page-shell .tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.page-shell .tech-chips li,
+.page-shell .tech-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.22rem 0.6rem;
+    border: 1px solid var(--hdr-panel-border);
+    border-radius: 999px;
+    background-color: var(--hdr-panel);
+    font-size: 0.74rem;
+    line-height: 1.5;
+    color: var(--hdr-muted) !important;
+}
+
+/* ---------- project cards ---------- */
+
+.page-shell .work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+@media (min-width: 640px) {
+    .page-shell .work-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .page-shell .work-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.page-shell .work-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid var(--hdr-panel-border);
+    background-color: var(--hdr-panel);
+    text-decoration: none;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-shell .work-card:hover {
+    border-color: rgba(251, 113, 133, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px -12px rgba(225, 29, 72, 0.35);
+}
+
+.page-shell .work-card img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.4s ease;
+}
+
+.page-shell .work-card:hover img {
+    filter: grayscale(0);
+}
+
+.page-shell .work-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1.1rem 1.25rem 1.35rem;
+}
+
+.page-shell .work-card h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--hdr-text) !important;
+}
+
+.page-shell .work-card p {
+    margin: 0;
+    font-size: 0.87rem;
+    line-height: 1.6;
+    color: var(--hdr-muted) !important;
+}
+
+.page-shell .work-card__more {
+    margin-top: 0.15rem;
+    font-size: 0.82rem;
+    color: var(--hdr-active) !important;
+}
+
+.page-shell .empty-note {
+    grid-column: 1 / -1;
+    margin: 2rem 0;
+    text-align: center;
+    color: var(--hdr-muted) !important;
+}
+
+/* ---------- pagination ---------- */
+
+.page-shell .pagination-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.page-shell .pagination {
+    gap: 0.35rem;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.page-shell .pagination .page-link {
+    min-width: 2.25rem;
+    border: 1px solid var(--hdr-panel-border) !important;
+    border-radius: 0.5rem !important;
+    background-color: var(--hdr-panel) !important;
+    font-size: 0.85rem;
+    text-align: center;
+    color: var(--hdr-text) !important;
+    box-shadow: none !important;
+}
+
+.page-shell .pagination .page-link:hover {
+    border-color: var(--hdr-active) !important;
+    color: var(--hdr-active) !important;
+}
+
+.page-shell .pagination .active .page-link {
+    background-color: rgba(225, 29, 72, 0.1) !important;
+    border-color: rgba(225, 29, 72, 0.35) !important;
+    color: var(--hdr-active) !important;
+}
+
+.page-shell .pagination .disabled .page-link {
+    opacity: 0.45;
+}
+
+/* ---------- project detail ---------- */
+
+.page-shell .detail-head h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.9rem, 5.5vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: var(--hdr-text) !important;
+}
+
+.page-shell .detail-cover {
+    margin: 2rem 0 2.5rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid var(--hdr-panel-border);
+    background-color: var(--hdr-panel);
+}
+
+.page-shell .detail-cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.page-shell .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+}
+
+@media (min-width: 992px) {
+    .page-shell .detail-grid {
+        grid-template-columns: 2fr 1fr;
+        gap: 3rem;
+    }
+}
+
+.page-shell .detail-prose h2 {
+    margin: 0 0 0.9rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--hdr-text) !important;
+}
+
+.page-shell .detail-prose p {
+    margin: 0 0 1.5rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--hdr-muted) !important;
+}
+
+.page-shell .detail-split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+    .page-shell .detail-split {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.page-shell .info-card {
+    padding: 1.35rem;
+    border-radius: 1rem;
+    border: 1px solid var(--hdr-panel-border);
+    background-color: var(--hdr-panel);
+}
+
+.page-shell .info-card h3 {
+    margin: 0 0 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--hdr-active) !important;
+}
+
+.page-shell .info-card p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--hdr-muted) !important;
+}
+
+.page-shell .detail-aside {
+    align-self: start;
+}
+
+@media (min-width: 992px) {
+    .page-shell .detail-aside {
+        position: sticky;
+        top: 6rem;
+    }
+}
+
+.page-shell .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+}
+
+.page-shell .gallery-grid a {
+    overflow: hidden;
+    border-radius: 0.6rem;
+    border: 1px solid var(--hdr-panel-border);
+}
+
+.page-shell .gallery-grid img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.page-shell .gallery-grid a:hover img {
+    transform: scale(1.06);
+}
+
+/* ---------- contact ---------- */
+
+.page-shell .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+@media (min-width: 992px) {
+    .page-shell .contact-grid {
+        grid-template-columns: 1.4fr 1fr;
+        gap: 3rem;
+    }
+}
+
+.page-shell .form-card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--hdr-panel-border);
+    background-color: var(--hdr-panel);
+}
+
+@media (min-width: 768px) {
+    .page-shell .form-card {
+        padding: 2rem;
+    }
+}
+
+.page-shell .form-card h2 {
+    margin: 0 0 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--hdr-text) !important;
+}
+
+.page-shell .field {
+    margin-bottom: 1.1rem;
+}
+
+.page-shell .field label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--hdr-muted) !important;
+}
+
+.page-shell .field input,
+.page-shell .field textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--hdr-panel-border);
+    border-radius: 0.6rem;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 0.92rem;
+    color: var(--hdr-text) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.page-shell .field input:focus,
+.page-shell .field textarea:focus {
+    outline: none;
+    border-color: var(--hdr-active);
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.12);
+}
+
+.page-shell .field textarea {
+    resize: vertical;
+    min-height: 8rem;
+}
+
+.page-shell .btn-submit {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.8rem 1.25rem;
+    border: 0;
+    border-radius: 0.6rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff !important;
+    background-image: linear-gradient(to right, #e11d48, #ef4444);
+    box-shadow: 0 0 30px -8px rgba(225, 29, 72, 0.6);
+    transition: filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.page-shell .btn-submit:hover:not(:disabled) {
+    filter: brightness(1.1);
+}
+
+.page-shell .btn-submit:disabled {
+    opacity: 0.65;
+    cursor: progress;
+}
+
+.page-shell .form-note {
+    margin-top: 1rem;
+    font-size: 0.87rem;
+}
+
+.page-shell .form-note .ok,
+.page-shell .form-note .bad {
+    display: block;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.6rem;
+    border: 1px solid;
+}
+
+.page-shell .form-note .ok {
+    border-color: rgba(16, 185, 129, 0.4);
+    background-color: rgba(16, 185, 129, 0.08);
+    color: #059669 !important;
+}
+
+.page-shell .form-note .bad {
+    border-color: rgba(225, 29, 72, 0.4);
+    background-color: rgba(225, 29, 72, 0.08);
+    color: var(--hdr-active) !important;
+}
+
+.page-shell .form-note ul {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+
+.page-shell .contact-block {
+    margin-bottom: 2rem;
+}
+
+.page-shell .contact-block h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--hdr-muted) !important;
+}
+
+.page-shell .contact-block p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--hdr-text) !important;
+}
+
+.page-shell .contact-block a {
+    text-decoration: none;
+    color: var(--hdr-text) !important;
+    transition: color 0.2s ease;
+}
+
+.page-shell .contact-block a:hover {
+    color: var(--hdr-active) !important;
+}
+
+.page-shell .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    font-size: 0.88rem;
+}
+
+.page-shell .contact-links a {
+    text-decoration: none;
+    color: var(--hdr-muted) !important;
+    transition: color 0.2s ease;
+}
+
+.page-shell .contact-links a:hover {
+    color: var(--hdr-active) !important;
+}
+
+/* ---------- section foot / CTA row ---------- */
+
+.page-shell .page-foot {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--hdr-border);
+    text-align: center;
+}
+
+.page-shell .page-foot a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.92rem;
+    text-decoration: none;
+    color: var(--hdr-text) !important;
+}
+
+.page-shell .page-foot a:hover {
+    color: var(--hdr-active) !important;
+}

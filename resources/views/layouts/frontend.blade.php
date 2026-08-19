@@ -22,18 +22,35 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <!-- Site header (floating sticky menu) -->
+    <link rel="stylesheet" href="{{ asset('assets/css/site-header.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/site-footer.css') }}">
+    <!-- Apply the stored theme before first paint so there is no flash -->
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <style>
-        * {
+        html:not(.dark) * {
             color: #000000 !important;
         }
-        h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link, .btn, .badge, .text-gold {
+        html:not(.dark) h1, html:not(.dark) h2, html:not(.dark) h3, html:not(.dark) h4,
+        html:not(.dark) h5, html:not(.dark) h6, html:not(.dark) .btn,
+        html:not(.dark) .badge, html:not(.dark) .text-gold {
             color: #000000 !important;
         }
         .btn-gold {
@@ -56,44 +73,8 @@
         .luxury-border, .luxury-border::after {
             border-color: #000000 !important;
         }
-        .navbar {
-            background-color: #ffffff !important;
-            padding: 15px 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .nav-link {
-            font-family: 'Fragment Mono', monospace;
-            text-transform: lowercase;
-            font-size: 0.9rem;
-            letter-spacing: -0.5px;
-            margin: 0 15px;
-        }
-        .navbar-brand img {
-            height: 40px;
-            width: auto;
-            max-width: 100%;
-            object-fit: contain;
-        }
-        @media (max-width: 576px) {
-            .navbar-brand img {
-                height: 30px;
-            }
-            .navbar-brand {
-                font-size: 1.2rem !important;
-                max-width: 70%;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-        }
-        .nav-link:hover, .nav-link.active {
-            color: var(--gold) !important;
-        }
         .footer {
             background-color: #ffffff !important;
-            padding: 60px 0;
-            border-top: 1px solid #eeeeee;
         }
         .page-header {
             padding: 120px 0 80px;
@@ -116,13 +97,58 @@
             background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
             opacity: 0.1;
         }
-        .opacity-75, .text-muted {
+        html:not(.dark) .opacity-75, html:not(.dark) .text-muted {
             opacity: 1 !important;
             color: #000000 !important;
         }
         /* Mobile adjustment */
         @media (max-width: 768px) {
             .hero-section { text-align: center; padding-top: 100px; }
+        }
+
+        /* ---------- dark theme (toggled from the header) ---------- */
+        html.dark body,
+        html.dark .hero-section,
+        html.dark .footer {
+            background-color: #0b0b0d !important;
+            color: #e5e7eb;
+        }
+        html.dark .page-header {
+            background-color: #111114 !important;
+            border-bottom-color: #27272a;
+        }
+        html.dark .footer { border-top-color: #27272a; }
+        html.dark .texture-bg::before { opacity: 0.04; }
+        html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6,
+        html.dark p, html.dark li, html.dark span, html.dark a, html.dark .playfair, html.dark .text-gold {
+            color: #e5e7eb;
+        }
+        html.dark .text-muted, html.dark .opacity-75 { color: #9ca3af !important; }
+        html.dark .card, html.dark .card-luxury {
+            background-color: #18181b !important;
+            border-color: #27272a !important;
+            color: #e5e7eb;
+        }
+        html.dark .badge {
+            background-color: #18181b !important;
+            border-color: #3f3f46 !important;
+            color: #e5e7eb !important;
+        }
+        html.dark .btn-gold {
+            background-color: #e5e7eb !important;
+            border-color: #e5e7eb !important;
+            color: #0b0b0d !important;
+        }
+        html.dark .btn-outline-dark, html.dark .btn-outline-navy, html.dark .btn-outline-gold {
+            border-color: #e5e7eb !important;
+            color: #e5e7eb !important;
+        }
+        html.dark .gold-line { background: #e5e7eb !important; }
+        html.dark .luxury-border, html.dark .luxury-border::after { border-color: #3f3f46 !important; }
+        html.dark .form-control, html.dark .form-select {
+            background-color: #18181b;
+            border-color: #3f3f46;
+            color: #e5e7eb;
         }
     </style>
     @stack('css')
@@ -131,65 +157,12 @@
 
 <div class="content-wrapper">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand playfair text-gold fw-bold fs-3" href="{{ route('home') }}">
-                @php
-                    $name = \App\Models\Setting::where('key', 'bio_name')->first();
-                    $title = \App\Models\Setting::where('key', 'bio_title')->first();
-                @endphp
-                {{ $name->value ?? 'MD SAIFUL ISLAM' }}
-                @if($title && $title->value)
-                    <span class="fs-6 fw-normal text-muted ms-2 d-none d-sm-inline">| {{ $title->value }}</span>
-                @endif
-            </a>
-            <button class="navbar-toggler border-gold" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-                <span class="fas fa-bars text-gold"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('projects.*') ? 'active' : '' }}" href="{{ route('projects.index') }}">Work</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('contact.index') ? 'active' : '' }}" href="{{ route('contact.index') }}">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('layouts.partials.site-header')
 
     @yield('content')
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container text-center">
-            <div class="mb-4">
-                @php
-                    $name = \App\Models\Setting::where('key', 'bio_name')->first();
-                    $title = \App\Models\Setting::where('key', 'bio_title')->first();
-                @endphp
-                <h2 class="playfair text-gold mb-1">{{ $name->value ?? 'MD SAIFUL ISLAM' }}</h2>
-                @if($title && $title->value)
-                    <p class="text-muted small text-uppercase letter-spacing-1">{{ $title->value }}</p>
-                @endif
-            </div>
-            <div class="d-flex justify-content-center gap-4 mb-4 fs-4">
-                @php $socials = \App\Models\Setting::whereIn('key', ['facebook', 'linkedin', 'whatsapp', 'github'])->pluck('value', 'key'); @endphp
-                @if($socials->get('facebook')) <a href="{{ $socials->get('facebook') }}" class="text-off-white" target="_blank"><i class="fab fa-facebook-f"></i></a> @endif
-                @if($socials->get('linkedin')) <a href="{{ $socials->get('linkedin') }}" class="text-off-white" target="_blank"><i class="fab fa-linkedin-in"></i></a> @endif
-                @if($socials->get('github')) <a href="{{ $socials->get('github') }}" class="text-off-white" target="_blank"><i class="fab fa-github"></i></a> @endif
-                @if($socials->get('whatsapp')) <a href="https://wa.me/{{ $socials->get('whatsapp') }}" class="text-off-white" target="_blank"><i class="fab fa-whatsapp"></i></a> @endif
-            </div>
-            <p class="text-muted small">&copy; {{ date('Y') }} All Rights Reserved. Built with Laravel.</p>
-        </div>
-    </footer>
+    @include('layouts.partials.site-footer')
 </div>
 
 <!-- JS -->
@@ -201,6 +174,45 @@
         duration: 800,
         once: true
     });
+</script>
+<script>
+    /* ---------- site header: More dropdown + theme switcher ---------- */
+    (function () {
+        var moreBtn = document.querySelector('[data-more-toggle]');
+        var moreMenu = document.querySelector('[data-more-menu]');
+
+        if (moreBtn && moreMenu) {
+            moreBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var open = moreMenu.classList.toggle('is-open');
+                moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!moreMenu.contains(e.target) && !moreBtn.contains(e.target)) {
+                    moreMenu.classList.remove('is-open');
+                    moreBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        var themeBtn = document.querySelector('[data-theme-toggle]');
+        if (themeBtn) {
+            themeBtn.addEventListener('click', function () {
+                var isDark = document.documentElement.classList.toggle('dark');
+                try {
+                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                } catch (e) {}
+            });
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && moreMenu) {
+                moreMenu.classList.remove('is-open');
+                if (moreBtn) moreBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    })();
 </script>
 @stack('js')
 </body>

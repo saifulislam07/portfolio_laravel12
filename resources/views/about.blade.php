@@ -1,146 +1,182 @@
 @extends('layouts.frontend')
 
-@section('title', 'About Me')
+@section('title', 'About')
+
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/about.css') }}">
+@endpush
 
 @section('content')
-<section class="page-header">
-    <div class="container">
-        <h1 class="display-4 playfair text-gold" data-aos="fade-down">{{ $settings['about_title'] ?? 'About Me' }}</h1>
-        <p class="lead" data-aos="fade-up">{{ $settings['about_subtitle'] ?? 'Laravel Developer ' }}</p>
-    </div>
-</section>
-
-<section class="py-5 my-5">
-    <div class="container-fluid px-md-5">
-        <div class="row g-5 align-items-center">
-            <div class="col-md-5" data-aos="fade-right">
-                <div class="luxury-border">
-                    @php
-                        $aboutImg = $settings['about_image'] ?? 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600&h=800';
-                        $aboutUrl = \Illuminate\Support\Str::startsWith($aboutImg, 'http') ? $aboutImg : asset($aboutImg);
-                    @endphp
-                    <img src="{{ $aboutUrl }}" alt="{{ $settings['bio_name'] ?? 'Md Saiful Islam' }}" class="img-fluid gray-scale shadow-lg w-100" style="filter: grayscale(100%);">
-                </div>
-            </div>
-            <div class="col-md-7" data-aos="fade-left">
-                <h2 class="playfair text-navy mb-4">Precision in Every Line of Code</h2>
-                <div class="text-muted lead mb-4">
-                    {!! nl2br(e($settings['bio_description'] ?? 'I am a dedicated software engineer with a focus on building robust backend systems using the Laravel framework.')) !!}
-                </div>
-                
-                <div class="row mt-5">
-                    <div class="col-md-6 mb-4">
-                        <h4 class="playfair text-gold mb-3">Enterprise Solutions</h4>
-                        <p class="text-muted small">Specializing in ERP systems, custom CMS, and high-traffic e-commerce platforms using Laravel and modern stacks.</p>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <h4 class="playfair text-gold mb-3">Clean Architecture</h4>
-                        <p class="text-muted small">Commitment to SOLID principles, TDD, and modular design patterns to ensure scalability and maintainability.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Skills Section -->
-<section class="py-5 bg-white border-top border-bottom text-navy">
-    <div class="container">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="playfair display-5 text-gold">My Expertise</h2>
-            <p class="text-muted">Continuously evolving and mastering new technologies.</p>
-        </div>
-
-        <div class="row g-4 justify-content-center">
-            @foreach($skills as $skill)
-            <div class="col-md-4" data-aos="flip-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-                <div class="skill-item mb-4">
-                    <div class="d-flex justify-content-between mb-2">
-                        <span class="fw-bold">{{ $skill->name }}</span>
-                        <span class="text-gold">{{ $skill->percentage }}%</span>
-                    </div>
-                    <div class="progress rounded-0" style="height: 4px; background: rgba(0,0,0,0.05);">
-                        <div class="progress-bar" role="progressbar" style="width: {{ $skill->percentage }}%; background-color: #000000 !important;" aria-valuenow="{{ $skill->percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-<!-- Education Section -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row justify-content-center">
-            <!-- Education Timeline -->
-            <div class="col-lg-8" data-aos="fade-up">
-                <h3 class="playfair text-navy mb-5 text-center">Educational Background</h3>
-                <div class="timeline px-md-5">
-                    @if(isset($settings['education_masters']))
-                    <div class="mb-4 border-start border-gold ps-4 position-relative">
-                        <div class="position-absolute start-0 top-0 translate-middle-x bg-gold rounded-circle" style="width: 12px; height: 12px; margin-left: -1px;"></div>
-                        <h5 class="playfair mb-1 text-navy">Masters of Management</h5>
-                        <p class="text-muted small mb-0">{{ $settings['education_masters'] }}</p>
-                    </div>
-                    @endif
-                    @if(isset($settings['education_bachelor']))
-                    <div class="mb-4 border-start border-gold ps-4 position-relative">
-                        <div class="position-absolute start-0 top-0 translate-middle-x bg-gold rounded-circle" style="width: 12px; height: 12px; margin-left: -1px;"></div>
-                        <h5 class="playfair mb-1 text-navy">Bachelor of Business Studies</h5>
-                        <p class="text-muted small mb-0">{{ $settings['education_bachelor'] }}</p>
-                    </div>
-                    @endif
-                    @if(isset($settings['education_hsc']))
-                    <div class="mb-4 border-start border-gold ps-4 position-relative">
-                        <div class="position-absolute start-0 top-0 translate-middle-x bg-gold rounded-circle" style="width: 12px; height: 12px; margin-left: -1px;"></div>
-                        <h5 class="playfair mb-1 text-navy">Higher Secondary Certificate</h5>
-                        <p class="text-muted small mb-0">{{ $settings['education_hsc'] }}</p>
-                    </div>
-                    @endif
-                    @if(isset($settings['education_ssc']))
-                    <div class="mb-4 border-start border-gold ps-4 position-relative">
-                        <div class="position-absolute start-0 top-0 translate-middle-x bg-gold rounded-circle" style="width: 12px; height: 12px; margin-left: -1px;"></div>
-                        <h5 class="playfair mb-1 text-navy">Secondary School Certificate</h5>
-                        <p class="text-muted small mb-0">{{ $settings['education_ssc'] }}</p>
-                    </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-    </div>
-</section>
-
 @php
+    use Illuminate\Support\Str;
+
+    $aboutImg = $settings['about_image'] ?? 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800&h=500';
+    $aboutUrl = Str::startsWith($aboutImg, 'http') ? $aboutImg : asset($aboutImg);
+
     $hobbies = \App\Models\Hobby::all();
+
+    // "Degree, Institution (2013 - 2015)" -> ['degree', 'institution', 'years']
+    $parseEducation = function ($value) {
+        if (blank($value)) {
+            return null;
+        }
+
+        $years = null;
+        if (preg_match('/\(([^)]*)\)\s*$/', $value, $m)) {
+            $years = trim($m[1]);
+            $value = trim(preg_replace('/\(([^)]*)\)\s*$/', '', $value));
+        }
+
+        $parts = array_map('trim', explode(',', $value, 2));
+
+        return [
+            'degree' => $parts[0] ?? $value,
+            'institution' => $parts[1] ?? null,
+            'years' => $years,
+        ];
+    };
+
+    $education = collect([
+        'education_masters' => 'fas fa-graduation-cap',
+        'education_bachelor' => 'fas fa-user-graduate',
+        'education_hsc' => 'fas fa-school',
+        'education_ssc' => 'fas fa-book-open',
+    ])->map(function ($icon, $key) use ($settings, $parseEducation) {
+        $row = $parseEducation($settings[$key] ?? null);
+
+        return $row ? $row + ['icon' => $icon] : null;
+    })->filter()->values();
+
+    $handle = fn ($url) => trim(parse_url($url, PHP_URL_PATH) ?? '', '/') ?: Str::of($url)->after('//')->before('/');
 @endphp
 
-@if($hobbies->count() > 0)
-<section class="py-5 bg-light">
-    <div class="container">
-        <h2 class="playfair text-center mb-5" data-aos="fade-up">My Interests & Hobbies</h2>
-        <div class="row g-4 justify-content-center">
-            @foreach($hobbies as $hobby)
-            <div class="col-md-3 col-6" data-aos="zoom-in">
-                <div class="card card-luxury h-100 text-center p-4 border-0 shadow-sm">
-                    <div class="mb-3">
-                        <i class="{{ $hobby->icon ?? 'fas fa-star' }} fs-2 text-gold"></i>
-                    </div>
-                    <h5 class="playfair mb-0 small text-uppercase">{{ $hobby->name }}</h5>
+<div class="about-page">
+
+    <div class="about-head">
+        <h1>{{ $settings['about_title'] ?? 'About' }}</h1>
+        <p>{{ $settings['about_subtitle'] ?? 'A bit of background on who I am, what I do, and what I like building.' }}</p>
+    </div>
+
+    <div class="about-grid">
+
+        <aside class="about-aside" data-aos="fade-right">
+            <div class="about-card">
+                <img class="about-card__cover" src="{{ $aboutUrl }}"
+                     alt="{{ $settings['bio_name'] ?? 'Md Saiful Islam' }}" width="550" height="350">
+
+                <div class="about-card__strip">
+                    <span class="dot"></span>
+                    <span>Open to new opportunities</span>
                 </div>
+
+                <div class="about-card__body">
+                    <h3 class="about-card__name">{{ $settings['bio_name'] ?? 'MD SAIFUL ISLAM' }}</h3>
+                    <p class="about-card__tagline">
+                        Learner | Builder | <span class="grad-text">{{ $settings['bio_title'] ?? 'Software Developer' }}</span>
+                    </p>
+
+                    <div class="about-meta">
+                        @if(!empty($settings['bio_title']))
+                            <div><i class="fas fa-briefcase"></i><span>{{ $settings['bio_title'] }}</span></div>
+                        @endif
+                        @if(!empty($settings['address']))
+                            <div><i class="fas fa-location-dot"></i><span>{{ $settings['address'] }}</span></div>
+                        @endif
+                        @if(!empty($settings['email']))
+                            <div><i class="fas fa-envelope"></i><a href="mailto:{{ $settings['email'] }}">{{ $settings['email'] }}</a></div>
+                        @endif
+                        @if(!empty($settings['phone']))
+                            <div><i class="fas fa-phone"></i><a href="tel:{{ $settings['phone'] }}">{{ $settings['phone'] }}</a></div>
+                        @endif
+                    </div>
+
+                    <div class="about-socials">
+                        @if(!empty($settings['github']))
+                            <a href="{{ $settings['github'] }}" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i><span class="slash">/</span><span>{{ $handle($settings['github']) }}</span>
+                            </a>
+                        @endif
+                        @if(!empty($settings['linkedin']))
+                            <a href="{{ $settings['linkedin'] }}" target="_blank" rel="noopener">
+                                <i class="fab fa-linkedin-in"></i><span class="slash">/</span><span>{{ Str::afterLast($handle($settings['linkedin']), '/') }}</span>
+                            </a>
+                        @endif
+                        @if(!empty($settings['facebook']))
+                            <a href="{{ $settings['facebook'] }}" target="_blank" rel="noopener">
+                                <i class="fab fa-facebook-f"></i><span class="slash">/</span><span>{{ $handle($settings['facebook']) }}</span>
+                            </a>
+                        @endif
+                        @if(!empty($settings['whatsapp']))
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['whatsapp']) }}" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i><span class="slash">/</span><span>WhatsApp</span>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
+                <span class="about-card__bar"></span>
             </div>
-            @endforeach
+        </aside>
+
+        <div class="about-prose" data-aos="fade-left">
+            <h2>Hi there 👋</h2>
+            <p>{!! nl2br(e($settings['bio_description'] ?? 'I am a dedicated software engineer focused on building robust backend systems with Laravel.')) !!}</p>
+
+            @if($skills->count())
+                <h3>Technologies 💻</h3>
+                <p>The tools I reach for, depending on the problem:</p>
+                <ul class="skill-chips">
+                    @foreach($skills as $skill)
+                        <li>
+                            <span>{{ $skill->name }}</span>
+                            <span class="pct">{{ $skill->percentage }}%</span>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+
+            @if($hobbies->count())
+                <h3>Interests 🐾</h3>
+                <ul>
+                    @foreach($hobbies as $hobby)
+                        <li><i class="{{ $hobby->icon ?? 'fas fa-star' }}"></i> {{ $hobby->name }}</li>
+                    @endforeach
+                </ul>
+            @endif
+
+            <h3>What I focus on</h3>
+            <ul>
+                <li><strong>Enterprise solutions:</strong> ERP systems, custom CMS and high-traffic e-commerce platforms on Laravel.</li>
+                <li><strong>Clean architecture:</strong> SOLID principles, tests and modular design so the code stays maintainable.</li>
+            </ul>
+
+            @if($education->count())
+                <h2>My education</h2>
+                <ul class="about-timeline">
+                    @foreach($education as $item)
+                        <li>
+                            <div class="tl-item">
+                                <span class="tl-mark"><i class="{{ $item['icon'] }}"></i></span>
+                                <div class="tl-body">
+                                    @if($item['years'])
+                                        <div class="tl-date">{{ $item['years'] }}</div>
+                                    @endif
+                                    <span class="tl-title">{{ $item['degree'] }}</span>
+                                    @if($item['institution'])
+                                        <div class="tl-sub"><i class="fas fa-building-columns"></i><span>{{ $item['institution'] }}</span></div>
+                                    @endif
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
     </div>
-</section>
-@endif
 
-<section class="py-5 my-5">
-    <div class="container text-center" data-aos="zoom-in">
-        <h3 class="playfair mb-4">Wanna collaborate on a project?</h3>
+    <div class="about-cta" data-aos="zoom-in">
+        <h3>Wanna collaborate on a project?</h3>
         <a href="{{ route('contact.index') }}" class="btn btn-gold px-5 py-3">LET'S START A CONVERSATION</a>
     </div>
-</section>
+</div>
 @endsection

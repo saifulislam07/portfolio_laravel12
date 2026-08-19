@@ -1,0 +1,383 @@
+/* ==========================================================================
+   About page — sticky profile card + prose + timeline (rathik.dev layout)
+   Colour tokens are shared with site-header.css (--hdr-*).
+   Every colour rule carries two classes so it beats the layout's
+   `html:not(.dark) * { color:#000 !important }` reset.
+   ========================================================================== */
+
+.about-page {
+    width: 100%;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1rem 4rem;
+}
+
+/* ---------- page heading ---------- */
+
+.about-page .about-head {
+    padding: 2.5rem 0 2rem;
+    border-bottom: 1px solid var(--hdr-border);
+}
+
+.about-page .about-head h1 {
+    font-size: clamp(2rem, 6vw, 3.75rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin: 0 0 0.75rem;
+    color: var(--hdr-text) !important;
+}
+
+.about-page .about-head p {
+    max-width: 46rem;
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--hdr-muted) !important;
+}
+
+/* ---------- two column body ---------- */
+
+.about-page .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 2.5rem 0;
+}
+
+@media (min-width: 768px) {
+    .about-page .about-grid {
+        grid-template-columns: 1fr 2fr;
+        gap: 3.5rem;
+    }
+}
+
+/* ---------- profile card ---------- */
+
+.about-page .about-aside {
+    align-self: start;
+}
+
+@media (min-width: 768px) {
+    .about-page .about-aside {
+        position: sticky;
+        top: 6rem;
+    }
+}
+
+.about-page .about-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid var(--hdr-panel-border);
+    background-color: var(--hdr-panel);
+    box-shadow: 0 0 25px -10px rgba(225, 29, 72, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.about-page .about-card:hover {
+    transform: scale(1.02);
+    border-color: rgba(251, 113, 133, 0.5);
+    box-shadow: 0 0 30px -8px rgba(225, 29, 72, 0.3);
+}
+
+.about-page .about-card__cover {
+    display: block;
+    width: 100%;
+    aspect-ratio: 383 / 240;
+    object-fit: cover;
+    object-position: 50% 15%;
+}
+
+.about-page .about-card__strip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    background-color: #111827;
+    font-size: 0.8rem;
+    color: #e5e7eb !important;
+}
+
+.about-page .about-card__strip span,
+.about-page .about-card__strip i {
+    color: #e5e7eb !important;
+}
+
+.about-page .about-card__strip .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #34d399;
+    flex: 0 0 auto;
+}
+
+.about-page .about-card__body {
+    padding: 1rem 1.25rem 1.25rem;
+}
+
+.about-page .about-card__name {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--hdr-text) !important;
+}
+
+.about-page .about-card__tagline {
+    margin: 0.4rem 0 0;
+    font-size: 0.9rem;
+    color: var(--hdr-muted) !important;
+}
+
+.about-page .grad-text {
+    background-image: linear-gradient(to right, #10b981, #3b82f6, #a855f7, #ec4899);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+    font-weight: 700;
+    animation: about-grad 6s linear infinite;
+}
+
+@keyframes about-grad {
+    0% { background-position: 0% center; }
+    100% { background-position: 300% center; }
+}
+
+.about-page .about-meta {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    font-size: 0.875rem;
+}
+
+.about-page .about-meta > div {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--hdr-text) !important;
+}
+
+.about-page .about-meta i {
+    width: 1rem;
+    text-align: center;
+    color: var(--hdr-muted) !important;
+}
+
+.about-page .about-meta a {
+    text-decoration: none;
+    color: var(--hdr-text) !important;
+    transition: color 0.2s ease;
+}
+
+.about-page .about-meta a:hover,
+.about-page .about-socials a:hover {
+    color: var(--hdr-active) !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.about-page .about-socials {
+    margin-top: 1.1rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+.about-page .about-socials a {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    text-decoration: none;
+    color: var(--hdr-text) !important;
+    transition: color 0.2s ease;
+}
+
+.about-page .about-socials .slash {
+    color: var(--hdr-muted) !important;
+}
+
+.about-page .about-card__bar {
+    height: 6px;
+    background: linear-gradient(to right, #e11d48, #ef4444, #f97316);
+}
+
+/* ---------- prose column ---------- */
+
+.about-page .about-prose {
+    font-size: 1.03rem;
+    line-height: 1.8;
+    color: var(--hdr-text) !important;
+}
+
+.about-page .about-prose h2 {
+    margin: 2.5rem 0 1rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--hdr-text) !important;
+}
+
+.about-page .about-prose h2:first-child {
+    margin-top: 0;
+}
+
+.about-page .about-prose h3 {
+    margin: 2rem 0 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--hdr-text) !important;
+}
+
+.about-page .about-prose p {
+    margin: 0 0 1.1rem;
+    color: var(--hdr-text) !important;
+}
+
+.about-page .about-prose ul {
+    margin: 0 0 1.25rem;
+    padding-left: 1.15rem;
+}
+
+.about-page .about-prose li {
+    margin: 0.4rem 0;
+    color: var(--hdr-text) !important;
+}
+
+/* ---------- skill chips ---------- */
+
+.about-page .skill-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+.about-page .skill-chips li {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--hdr-panel-border);
+    border-radius: 999px;
+    background-color: var(--hdr-panel);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.about-page .skill-chips li:hover {
+    border-color: var(--hdr-active);
+    transform: translateY(-1px);
+}
+
+.about-page .skill-chips .pct {
+    font-size: 0.72rem;
+    color: var(--hdr-muted) !important;
+}
+
+/* ---------- timeline ---------- */
+
+.about-page .about-timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.about-page .about-timeline > li {
+    margin: 0;
+    padding: 0;
+}
+
+.about-page .tl-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    margin: 0 -0.75rem;
+    padding: 0.75rem;
+    border-radius: 0.6rem;
+    transition: background-color 0.2s ease;
+}
+
+.about-page .tl-item:hover {
+    background-color: var(--hdr-hover-bg);
+}
+
+/* connector line between the markers */
+.about-page .about-timeline > li:not(:last-child) .tl-item::before {
+    content: "";
+    position: absolute;
+    left: 2.25rem;
+    top: 3.6rem;
+    width: 1px;
+    height: calc(100% - 2.4rem);
+    background-color: var(--hdr-divider);
+}
+
+.about-page .tl-mark {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--hdr-panel-border);
+    background-color: var(--hdr-panel);
+    font-size: 1.1rem;
+    color: var(--hdr-text) !important;
+}
+
+.about-page .tl-body {
+    width: 100%;
+}
+
+.about-page .tl-date {
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--hdr-muted) !important;
+}
+
+.about-page .tl-title {
+    display: block;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 0.1rem 0;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--hdr-text) !important;
+}
+
+.about-page .tl-sub {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--hdr-muted) !important;
+}
+
+/* ---------- closing call to action ---------- */
+
+.about-page .about-cta {
+    margin-top: 1rem;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid var(--hdr-border);
+}
+
+.about-page .about-cta h3 {
+    margin: 0 0 1.25rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--hdr-text) !important;
+}

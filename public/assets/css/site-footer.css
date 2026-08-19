@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Site footer — logo + tagline + local time on the left, link columns right.
+   Shares the --hdr-* tokens with the header; two-class colour rules so they
+   beat the layout's `html:not(.dark) * { color:#000 !important }`.
+   ========================================================================== */
+
+.site-footer {
+    width: 100%;
+    max-width: 72rem;
+    margin: 4rem auto 0;
+    padding: 0 1rem 1.5rem;
+}
+
+.site-footer .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--hdr-border);
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .site-footer .site-footer__grid {
+        grid-template-columns: 1.6fr 1fr 1fr;
+        gap: 2.5rem;
+    }
+}
+
+/* ---------- brand column ---------- */
+
+.site-footer .site-footer__brand {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.site-footer .site-footer__tagline {
+    max-width: 32rem;
+    margin: 0;
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--hdr-muted) !important;
+}
+
+.site-footer .site-footer__socials {
+    display: flex;
+    gap: 1.1rem;
+    margin-top: 1.35rem;
+    font-size: 1.05rem;
+}
+
+.site-footer .site-footer__socials a {
+    color: var(--hdr-text) !important;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.site-footer .site-footer__socials a:hover {
+    color: var(--hdr-active) !important;
+    transform: translateY(-2px);
+}
+
+.site-footer .site-footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1rem;
+    margin-top: 1.35rem;
+    font-size: 0.8rem;
+    color: var(--hdr-muted) !important;
+}
+
+.site-footer .site-footer__meta span,
+.site-footer .site-footer__meta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    text-decoration: none;
+    color: var(--hdr-muted) !important;
+}
+
+.site-footer .site-footer__meta a:hover {
+    color: var(--hdr-active) !important;
+}
+
+.site-footer .site-footer__meta .offset {
+    opacity: 0.75;
+}
+
+/* ---------- link columns ---------- */
+
+.site-footer .site-footer__col h4 {
+    margin: 0 0 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--hdr-muted) !important;
+}
+
+.site-footer .site-footer__col ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.site-footer .site-footer__col a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-size: 0.88rem;
+    text-decoration: none;
+    color: var(--hdr-text) !important;
+    transition: color 0.2s ease;
+}
+
+.site-footer .site-footer__col a:hover {
+    color: var(--hdr-active) !important;
+}
+
+.site-footer .site-footer__col a i {
+    width: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--hdr-muted) !important;
+}
+
+/* ---------- bottom bar ---------- */
+
+.site-footer .site-footer__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--hdr-border);
+    font-size: 0.78rem;
+    color: var(--hdr-muted) !important;
+}
+
+.site-footer .site-footer__bar a {
+    text-decoration: none;
+    color: var(--hdr-muted) !important;
+}
+
+.site-footer .site-footer__bar a:hover {
+    color: var(--hdr-active) !important;
+}
+
+.site-footer .site-footer__bar .heart {
+    color: var(--hdr-active) !important;
+}

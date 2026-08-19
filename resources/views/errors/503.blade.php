@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>503 - Under Maintenance</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Fragment+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="{{ asset('assets/css/typography.css') }}" rel="stylesheet">
     <style>
         body {
             background-color: #ffffff;
             color: #000000;
-            font-family: 'Fragment Mono', monospace;
+            font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             height: 100vh;
             display: flex;
             align-items: center;
@@ -26,7 +27,7 @@
             width: 90%;
         }
         .error-code {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             font-size: 80px;
             line-height: 1;
             margin-bottom: 20px;

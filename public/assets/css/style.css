@@ -4,18 +4,35 @@
     --off-white: #ffffff;
     --text-muted: #666666;
     --luxury-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    /* site-wide typeface */
+    --font-jetbrains-mono: 'JetBrains Mono';
+    --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+html,
+body,
+button,
+input,
+optgroup,
+select,
+textarea,
+code,
+pre,
+kbd,
+samp {
+    font-family: var(--font-mono);
 }
 
 body {
     background-color: var(--off-white);
     color: #000000;
-    font-family: 'Fragment Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 1rem;
     line-height: 1.7;
 }
 
-h1, h2, h3, h4, .playfair {
-    font-family: 'Fragment Mono', monospace;
+h1, h2, h3, h4, h5, h6, .playfair {
+    font-family: var(--font-mono);
     font-weight: 400;
     letter-spacing: -1px;
 }
