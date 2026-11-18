@@ -13,11 +13,15 @@ class DatabaseSeeder extends Seeder {
      */
     public function run(): void {
         // Add Admin User
-        \App\Models\User::updateOrCreate(['email' => 'admin@admin.com'], [
-            'name'              => 'Md Saiful Islam',
-            'password'          => \Illuminate\Support\Facades\Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
+        // Online, set ADMIN_EMAIL and ADMIN_PASSWORD; the local default stays admin@admin.com / password.
+        $adminPassword = env('ADMIN_PASSWORD', app()->isProduction() ? null : 'password');
+        if ($adminPassword) {
+            \App\Models\User::updateOrCreate(['email' => env('ADMIN_EMAIL', 'admin@admin.com')], [
+                'name'              => 'Md Saiful Islam',
+                'password'          => \Illuminate\Support\Facades\Hash::make($adminPassword),
+                'email_verified_at' => now(),
+            ]);
+        }
 
         // Add Default Settings
         $settings = [

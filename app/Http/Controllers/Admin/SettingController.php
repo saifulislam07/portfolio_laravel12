@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Support\Uploads;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -28,22 +29,19 @@ class SettingController extends Controller
         if ($request->hasFile('logo')) {
             $image = $request->file('logo');
             $name = 'logo_' . time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/settings'), $name);
-            Setting::updateOrCreate(['key' => 'logo'], ['value' => 'uploads/settings/' . $name]);
+            Setting::updateOrCreate(['key' => 'logo'], ['value' => Uploads::store($image, 'uploads/settings', $name)]);
         }
 
         if ($request->hasFile('hero_image')) {
             $image = $request->file('hero_image');
             $name = 'hero_' . time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/settings'), $name);
-            Setting::updateOrCreate(['key' => 'hero_image'], ['value' => 'uploads/settings/' . $name]);
+            Setting::updateOrCreate(['key' => 'hero_image'], ['value' => Uploads::store($image, 'uploads/settings', $name)]);
         }
 
         if ($request->hasFile('about_image')) {
             $image = $request->file('about_image');
             $name = 'about_' . time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/settings'), $name);
-            Setting::updateOrCreate(['key' => 'about_image'], ['value' => 'uploads/settings/' . $name]);
+            Setting::updateOrCreate(['key' => 'about_image'], ['value' => Uploads::store($image, 'uploads/settings', $name)]);
         }
 
         return redirect()->back()->with('success', 'Settings updated successfully.');

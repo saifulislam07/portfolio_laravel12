@@ -62,3 +62,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+// One-time database setup for hosts without a terminal (e.g. Vercel).
+// Works only when SETUP_TOKEN is set; remove that env var after setup.
+Route::get('/backdoor/setup/{token}', function (string $token) {
+    $expected = env('SETUP_TOKEN');
+    abort_unless($expected && hash_equals($expected, $token), 404);
+
+    \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    $out = \Illuminate\Support\Facades\Artisan::output();
+
+    if (request()->boolean('seed')) {
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        $out .= \Illuminate\Support\Facades\Artisan::output();
+    }
+
+    return response("<pre>" . e($out) . "</pre>");
+});

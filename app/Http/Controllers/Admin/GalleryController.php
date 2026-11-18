@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use App\Models\Category;
+use App\Support\Uploads;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -25,12 +26,9 @@ class GalleryController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $name = time() . '_' . bin2hex(random_bytes(4)) . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads/gallery'), $name);
-                
                 Gallery::create([
                     'category_id' => $request->category_id,
-                    'image_path' => 'uploads/gallery/' . $name
+                    'image_path' => Uploads::store($image, 'uploads/gallery'),
                 ]);
             }
         }
@@ -40,9 +38,7 @@ class GalleryController extends Controller
 
     public function destroy(Gallery $gallery)
     {
-        if (file_exists(public_path($gallery->image_path))) {
-            @unlink(public_path($gallery->image_path));
-        }
+        Uploads::delete($gallery->image_path);
         $gallery->delete();
         return redirect()->back()->with('success', 'Photo deleted.');
     }

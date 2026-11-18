@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Support\Uploads;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -34,20 +35,15 @@ class ProjectController extends Controller
         $data['tech_stack'] = explode(',', $request->tech_stack);
 
         if ($request->hasFile('cover_image')) {
-            $image = $request->file('cover_image');
-            $name = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/projects'), $name);
-            $data['cover_image'] = 'uploads/projects/' . $name;
+            $data['cover_image'] = Uploads::store($request->file('cover_image'), 'uploads/projects');
         }
 
         $project = Project::create($data);
 
         if ($request->hasFile('gallery_images')) {
             foreach ($request->file('gallery_images') as $file) {
-                $fname = time() . '_' . bin2hex(random_bytes(4)) . '_' . $file->getClientOriginalName();
-                $file->move(public_path('uploads/projects/gallery'), $fname);
                 $project->images()->create([
-                    'image_path' => 'uploads/projects/gallery/' . $fname
+                    'image_path' => Uploads::store($file, 'uploads/projects/gallery'),
                 ]);
             }
         }
@@ -76,23 +72,16 @@ class ProjectController extends Controller
 
         if ($request->hasFile('cover_image')) {
             // Delete old
-            if (file_exists(public_path($project->cover_image))) {
-                @unlink(public_path($project->cover_image));
-            }
-            $image = $request->file('cover_image');
-            $name = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/projects'), $name);
-            $data['cover_image'] = 'uploads/projects/' . $name;
+            Uploads::delete($project->cover_image);
+            $data['cover_image'] = Uploads::store($request->file('cover_image'), 'uploads/projects');
         }
 
         $project->update($data);
 
         if ($request->hasFile('gallery_images')) {
             foreach ($request->file('gallery_images') as $file) {
-                $fname = time() . '_' . bin2hex(random_bytes(4)) . '_' . $file->getClientOriginalName();
-                $file->move(public_path('uploads/projects/gallery'), $fname);
                 $project->images()->create([
-                    'image_path' => 'uploads/projects/gallery/' . $fname
+                    'image_path' => Uploads::store($file, 'uploads/projects/gallery'),
                 ]);
             }
         }
@@ -102,13 +91,9 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        if (file_exists(public_path($project->cover_image))) {
-            @unlink(public_path($project->cover_image));
-        }
+        Uploads::delete($project->cover_image);
         foreach ($project->images as $img) {
-            if (file_exists(public_path($img->image_path))) {
-                @unlink(public_path($img->image_path));
-            }
+            Uploads::delete($img->image_path);
             $img->delete();
         }
         $project->delete();
@@ -117,9 +102,7 @@ class ProjectController extends Controller
 
     public function deleteImage(\App\Models\ProjectImage $image)
     {
-        if (file_exists(public_path($image->image_path))) {
-            @unlink(public_path($image->image_path));
-        }
+        Uploads::delete($image->image_path);
         $image->delete();
         return redirect()->back()->with('success', 'Gallery image deleted.');
     }
